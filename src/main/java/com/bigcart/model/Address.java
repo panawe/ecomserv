@@ -42,6 +42,12 @@ public class Address extends BaseEntity {
 	@Transient
 	private Long zoneId;
 	
+	public Address() {}
+	
+	public Address(Long id) {
+		super();
+		this.id = id;
+	}
 	public Long getId() {
 		return id;
 	}

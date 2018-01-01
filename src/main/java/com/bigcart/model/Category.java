@@ -31,6 +31,13 @@ public class Category extends BaseEntity {
 	@Transient
 	private Long parentId;
 
+	public Category() {}
+	
+	public Category(Long id) {
+		super();
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
