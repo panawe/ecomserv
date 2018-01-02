@@ -18,11 +18,11 @@ public class CouponCategory extends BaseEntity {
 	
 	@Id
 	@ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id")
 	private Category category;
 	@Id
 	@ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "id")
+    @JoinColumn(name = "store_id")
 	private Coupon coupon;
 	
 	@Transient

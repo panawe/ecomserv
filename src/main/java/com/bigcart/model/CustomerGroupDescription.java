@@ -11,40 +11,39 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.bigcart.model.id.AttributeDescriptionId;
+import com.bigcart.model.id.AttributeGroupDescriptionId;
 
 @Entity
-@Table(name = "oc_attribute_description")
-public class AttributeDescription extends BaseEntity {
+@Table(name = "oc_customer_group_description")
+public class CustomerGroupDescription extends BaseEntity {
 	
 	@Id
-	@GeneratedValue
-	@Column(name = "attribute_description_id")
+	@Column(name = "customer_group_description_id")
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "attribute_id")
-	private Attribute attribute;
+	@JoinColumn(name = "customer_group_id")
+	private CustomerGroup customerGroup;
 	@ManyToOne
 	@JoinColumn(name = "language_id")
 	private Language language;
 	private String name;
+	private String description;
 	
 	@Transient
-	private Long attributeId;
+	private Long customerGroupId;
 	@Transient
 	private Long languageId;
-	
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Attribute getAttribute() {
-		return attribute;
+	public CustomerGroup getCustomerGroup() {
+		return customerGroup;
 	}
-	public void setAttribute(Attribute attribute) {
-		this.attribute = attribute;
+	public void setCustomerGroup(CustomerGroup customerGroup) {
+		this.customerGroup = customerGroup;
 	}
 	public Language getLanguage() {
 		return language;
@@ -58,15 +57,20 @@ public class AttributeDescription extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	// Transient properties
-	public Long getAttributeId() {
-		return attributeId;
+	public Long getCustomerGroupId() {
+		return customerGroupId;
 	}
-	public void setAttributeId(Long attributeId) {
-		this.attributeId = attributeId;
-		this.setAttribute(new Attribute(attributeId));
+	public void setCustomerGroupId(Long customerGroupId) {
+		this.customerGroupId = customerGroupId;
+		this.setCustomerGroup(new CustomerGroup(customerGroupId));
 	}
 	public Long getLanguageId() {
 		return languageId;
@@ -75,6 +79,4 @@ public class AttributeDescription extends BaseEntity {
 		this.languageId = languageId;
 		this.setLanguage(new Language(languageId));
 	}
-
-	
 }

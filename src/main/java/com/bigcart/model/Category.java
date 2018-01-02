@@ -102,6 +102,7 @@ public class Category extends BaseEntity {
 
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
+		this.setParent(new Category(parentId));
 	}
 
 }

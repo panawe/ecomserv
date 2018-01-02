@@ -1,5 +1,6 @@
 package com.bigcart.model;
 
+
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -8,39 +9,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "oc_coupon_history")
-public class CouponHistory extends BaseEntity {
+@Table(name = "oc_customer_transaction")
+public class CustomerTransaction extends BaseEntity {
 	
 	@Id
-	@Column(name = "coupon_history_id")
+	@Column(name = "customer_transaction_id")
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "coupon_id")
-	private Coupon coupon;
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
-	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+	private String description;
 	private BigDecimal amount;
 	
 	@Transient
-	private Long couponId;
+	private Long customerId;
 	@Transient
 	private Long orderId;
-	@Transient
-	private Long customerId;
 	
-	public CouponHistory() {}
+	public CustomerTransaction() {}
 	
-	public CouponHistory(Long id) {
+	public CustomerTransaction(Long id) {
 		super();
 		this.id = id;
 	}
@@ -53,12 +49,12 @@ public class CouponHistory extends BaseEntity {
 		this.id = id;
 	}
 
-	public Coupon getCoupon() {
-		return coupon;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCoupon(Coupon coupon) {
-		this.coupon = coupon;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Order getOrder() {
@@ -69,12 +65,12 @@ public class CouponHistory extends BaseEntity {
 		this.order = order;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public BigDecimal getAmount() {
@@ -85,13 +81,13 @@ public class CouponHistory extends BaseEntity {
 		this.amount = amount;
 	}
 
-	public Long getCouponId() {
-		return couponId;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setCouponId(Long couponId) {
-		this.couponId = couponId;
-		this.setCoupon(new Coupon(couponId));
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+		this.setCustomer(new Customer(customerId));
 	}
 
 	public Long getOrderId() {
@@ -103,12 +99,4 @@ public class CouponHistory extends BaseEntity {
 		this.setOrder(new Order(orderId));
 	}
 
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-		this.setCustomer(new Customer(customerId));
-	}
 }

@@ -2,6 +2,7 @@ package com.bigcart.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -10,14 +11,16 @@ import javax.persistence.Table;
 import com.bigcart.model.id.CategoryStoreId;
 
 @Entity
-@Table(name = "oc_category_to_layout")
-@IdClass(CategoryStoreId.class)
-public class CategoryLayout extends BaseEntity {
+@Table(name = "oc_information_to_layout")
+public class InformationLayout extends BaseEntity {
 	
 	@Id
+	@Column(name = "information_layout_id")
+	@GeneratedValue
+	private Long id;
 	@ManyToOne
-    @JoinColumn(name = "category_id")
-	private Category category;
+    @JoinColumn(name = "information_id")
+	private Information information;
 	@Id
 	@ManyToOne
     @JoinColumn(name = "store_id")
@@ -25,11 +28,17 @@ public class CategoryLayout extends BaseEntity {
 	@Column(name="layout_id")
 	private Long layoutId;
 	
-	public Category getCategory() {
-		return category;
+	public Long getId() {
+		return id;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Information getInformation() {
+		return information;
+	}
+	public void setInformation(Information information) {
+		this.information = information;
 	}
 	public Store getStore() {
 		return store;
@@ -43,9 +52,5 @@ public class CategoryLayout extends BaseEntity {
 	public void setLayoutId(Long layoutId) {
 		this.layoutId = layoutId;
 	}
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

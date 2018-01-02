@@ -26,6 +26,13 @@ public class Attribute extends BaseEntity {
 	@Transient
 	private Long attributeGroupId;
 
+	
+	public Attribute() {}
+	public Attribute(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

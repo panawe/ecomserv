@@ -2,22 +2,25 @@ package com.bigcart.model.id;
 
 import java.io.Serializable;
 
+import com.bigcart.model.Category;
+import com.bigcart.model.Store;
+
 public class CategoryStoreId implements Serializable {
 
-	private Long categoryId;
-	private Long storeId;
+	private Category category;
+	private Store store;
 	
 	
-	public Long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
-	public Long getStoreId() {
-		return storeId;
+	public Store getStore() {
+		return store;
 	}
-	public void setStoreId(Long storeId) {
-		this.storeId = storeId;
+	public void setStore(Store store) {
+		this.store = store;
 	}
 }
