@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "oc_manufacturer_to_store")
@@ -19,10 +20,15 @@ public class ManufacturerStore extends BaseEntity {
 	@ManyToOne
     @JoinColumn(name = "manufacturer_id")
 	private Manufacturer manufacturer;
-	@Id
 	@ManyToOne
     @JoinColumn(name = "store_id")
 	private Store store;
+	
+	@Transient
+	private Long manufacturerId;
+	@Transient
+	private Long storeId;
+	
 	
 	public Long getId() {
 		return id;
@@ -41,6 +47,20 @@ public class ManufacturerStore extends BaseEntity {
 	}
 	public void setStore(Store store) {
 		this.store = store;
+	}
+	public Long getManufacturerId() {
+		return manufacturerId;
+	}
+	public void setManufacturerId(Long manufacturerId) {
+		this.manufacturerId = manufacturerId;
+		this.setManufacturer(new Manufacturer(manufacturerId));
+	}
+	public Long getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Long storeId) {
+		this.storeId = storeId;
+		this.setStore(new Store(storeId));
 	}
 
 }

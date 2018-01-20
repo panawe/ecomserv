@@ -1,10 +1,13 @@
 package com.bigcart.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,8 +26,18 @@ public class Filter extends BaseEntity {
 	@Column(name="sort_order")
 	private int sortOrder;
 	
+	@ManyToMany(mappedBy="filters")
+	private Set<Category> categories;
+	
 	@Transient
 	private Long filterGroupId;
+
+	
+	public Filter() {}
+	public Filter(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
@@ -49,6 +62,13 @@ public class Filter extends BaseEntity {
 		this.sortOrder = sortOrder;
 	}
 
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	
 	// Transient properties
 	public Long getFilterGroupId() {
 		return filterGroupId;

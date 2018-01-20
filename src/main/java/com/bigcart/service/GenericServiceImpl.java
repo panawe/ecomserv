@@ -25,8 +25,14 @@ public class GenericServiceImpl implements GenericService {
 		this.genericDao.save(entity);		
 	}
 	
+	@Transactional
 	public void delete(BaseEntity entity) {
 		this.genericDao.delete(entity);
+	}
+	
+	@Transactional
+	public void delete(Class cl, List<Long> ids) {
+		this.genericDao.delete(cl, ids);
 	}
 
 	public BaseEntity find(Class cl, Long key) {

@@ -1,39 +1,38 @@
 package com.bigcart.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = "oc_category_description")
-public class CategoryDescription extends BaseEntity {
-	
 
+@Entity
+@Table(name = "oc_product_description")
+public class ProductDescription extends BaseEntity {
+	
 	@Id
-	@Column(name = "category_description_id")
-	@GeneratedValue
+	@Column(name = "product_description_id")
 	private Long id;
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-	private Category category;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 	@ManyToOne
 	@JoinColumn(name = "language_id")
 	private Language language;
 	private String name;
 	private String description;
-	@Column(name = "meta_title")
+	private String tag;
 	private String metaTitle;
-	@Column(name = "meta_description")
 	private String metaDescription;
-	@Column(name = "meta_keyword")
 	private String metaKeyword;
 	
+	@Transient
+	private Long productId;
+	@Transient
+	private Long languageId;
 	
 	public Long getId() {
 		return id;
@@ -41,11 +40,11 @@ public class CategoryDescription extends BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Category getCategory() {
-		return category;
+	public Product getProduct() {
+		return product;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public Language getLanguage() {
 		return language;
@@ -64,6 +63,12 @@ public class CategoryDescription extends BaseEntity {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	public String getMetaTitle() {
 		return metaTitle;
@@ -85,4 +90,18 @@ public class CategoryDescription extends BaseEntity {
 	}
 	
 	
+	public Long getLanguageId() {
+		return languageId;
+	}
+	public void setLanguageId(Long languageId) {
+		this.languageId = languageId;
+		this.setLanguage(new Language(languageId));
+	}
+	public Long getProductId() {
+		return productId;
+	}
+	public void setProductId(Long productId) {
+		this.productId = productId;
+		this.setProduct(new Product(productId));
+	}
 }

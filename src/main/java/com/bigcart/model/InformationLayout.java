@@ -8,10 +8,12 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.bigcart.model.id.CategoryStoreId;
 
 @Entity
-@Table(name = "oc_information_to_layout")
+@Table(name = "oc_information_layout")
 public class InformationLayout extends BaseEntity {
 	
 	@Id
@@ -19,13 +21,15 @@ public class InformationLayout extends BaseEntity {
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
-    @JoinColumn(name = "information_id")
-	private Information information;
-	@Id
+    @JoinColumn(name = "information_store_id")
+	private InformationStore informationStore;
 	@ManyToOne
-    @JoinColumn(name = "store_id")
-	private Store store;
-	@Column(name="layout_id")
+    @JoinColumn(name="layout_id")
+	private Layout layout;
+	
+	@Transient
+	private Long informationStoreId;
+	@Transient
 	private Long layoutId;
 	
 	public Long getId() {
@@ -34,23 +38,32 @@ public class InformationLayout extends BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Information getInformation() {
-		return information;
+	public InformationStore getInformationStore() {
+		return informationStore;
 	}
-	public void setInformation(Information information) {
-		this.information = information;
+	public void setInformationStore(InformationStore informationStore) {
+		this.informationStore = informationStore;
 	}
-	public Store getStore() {
-		return store;
+	public Layout getLayout() {
+		return layout;
 	}
-	public void setStore(Store store) {
-		this.store = store;
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
+	public Long getInformationStoreId() {
+		return informationStoreId;
+	}
+	public void setInformationStoreId(Long informationStoreId) {
+		this.informationStoreId = informationStoreId;
+		this.setInformationStore(new InformationStore(informationStoreId));
 	}
 	public Long getLayoutId() {
 		return layoutId;
 	}
 	public void setLayoutId(Long layoutId) {
 		this.layoutId = layoutId;
+		this.setLayout(new Layout(layoutId));
 	}
+	
 	
 }

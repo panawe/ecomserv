@@ -2,6 +2,7 @@ package com.bigcart.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -9,27 +10,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.bigcart.model.id.FilterGroupDescriptionId;
+import com.bigcart.model.id.AttributeDescriptionId;
 
 @Entity
-@Table(name = "oc_filter_group_description")
-public class FilterGroupDescription extends BaseEntity {
+@Table(name = "oc_recurring_description")
+public class RecurringDescription extends BaseEntity {
+	
 	@Id
-	@Column(name = "filter_group_description_id")
+	@GeneratedValue
+	@Column(name = "recurring_description_id")
 	private Long id;
-	
 	@ManyToOne
-	@JoinColumn(name = "filter_group_id")
-	private FilterGroup filterGroup;
-	
+	@JoinColumn(name = "recurring_id")
+	private Recurring recurring;
 	@ManyToOne
 	@JoinColumn(name = "language_id")
 	private Language language;
-	
 	private String name;
 	
 	@Transient
-	private Long filterGroupId;	
+	private Long recurringId;
 	@Transient
 	private Long languageId;
 	
@@ -39,12 +39,6 @@ public class FilterGroupDescription extends BaseEntity {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public FilterGroup getFilterGroup() {
-		return filterGroup;
-	}
-	public void setFilterGroup(FilterGroup filterGroup) {
-		this.filterGroup = filterGroup;
 	}
 	public Language getLanguage() {
 		return language;
@@ -58,12 +52,18 @@ public class FilterGroupDescription extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getFilterGroupId() {
-		return filterGroupId;
+	
+	public Recurring getRecurring() {
+		return recurring;
 	}
-	public void setFilterGroupId(Long filterGroupId) {
-		this.filterGroupId = filterGroupId;
-		this.setFilterGroup(new FilterGroup(filterGroupId));
+	public void setRecurring(Recurring recurring) {
+		this.recurring = recurring;
+	}
+	public Long getRecurringId() {
+		return recurringId;
+	}
+	public void setRecurringId(Long recurringId) {
+		this.recurringId = recurringId;
 	}
 	public Long getLanguageId() {
 		return languageId;
@@ -72,4 +72,6 @@ public class FilterGroupDescription extends BaseEntity {
 		this.languageId = languageId;
 		this.setLanguage(new Language(languageId));
 	}
+
+	
 }

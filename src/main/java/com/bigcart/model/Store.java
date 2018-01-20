@@ -1,9 +1,12 @@
 package com.bigcart.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,8 @@ public class Store extends BaseEntity {
 	private String url;
 	private String ssl;
 	
+	@ManyToMany(mappedBy="stores")
+	private Set<Category> categories;
 	
 	public Store() {}
 	
@@ -56,4 +61,13 @@ public class Store extends BaseEntity {
 	public void setSsl(String ssl) {
 		this.ssl = ssl;
 	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	
 }

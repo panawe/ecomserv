@@ -14,9 +14,9 @@ import com.bigcart.model.id.AttributeDescriptionId;
 import com.bigcart.model.id.CategoryDescriptionId;
 import com.bigcart.model.id.CategoryFilterId;
 
-@Entity
-@Table(name = "oc_category_filter")
-@IdClass(CategoryFilterId.class)
+//@Entity
+//@Table(name = "oc_category_filter")
+//@IdClass(CategoryFilterId.class)
 public class CategoryFilter extends BaseEntity {
 	
 	@Id
